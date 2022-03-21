@@ -2,6 +2,7 @@
 #define MESSAGE_H
 
 #include <QObject>
+#include <QString>
 
 class Message : public QObject
 {
@@ -10,9 +11,11 @@ public:
     explicit Message(QObject *parent = nullptr);
 public slots:
     void doMessageChange();
-
 signals:
-
+    void messageChanged(QString value);
+private:
+    int m_counter;
+    QString m_message;
 };
 
 #endif // MESSAGE_H

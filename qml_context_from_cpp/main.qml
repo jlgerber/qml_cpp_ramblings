@@ -7,12 +7,19 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
+    // connect javascript funtion to c++ signal
+    Connections {
+        target: messageClass
+        // value is the name of the messageClass.messageChanged slot argument in c++
+        onMessageChanged: function onMessageChanged(value) {textId.text = value;}
+    }
     Column {
         Text {
             text: qsTr("Hello Integration World")
         }
 
         Button {
+            id: textId
             text: "Change Text"
             width: 200
             onClicked: messageClass.doMessageChange()
