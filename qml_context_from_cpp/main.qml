@@ -7,12 +7,11 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-    // connect javascript funtion to c++ signal
-    Connections {
-        target: messageClass
-        // value is the name of the messageClass.messageChanged slot argument in c++
-        onMessageChanged: function onMessageChanged(value) {textId.text = value;}
+    Component.onCompleted: {
+        // we can also set the property directly from qml
+        messageClass.message = "set from qml %1";
     }
+    // we no longer need to use connection
     Column {
         Text {
             text: qsTr("Hello Integration World")
@@ -20,10 +19,13 @@ ApplicationWindow {
 
         Button {
             id: textId
-            text: "Change Text"
+            // get text directly from messageClass message property
+            text: messageClass.message
             width: 200
-            onClicked: messageClass.doMessageChange()
-
+            // the slot no longer takes a parameter. doMessageChange simply calls the setMessage property setter
+            //onClicked:  messageClass.doMessageChange()
+            // we can also call directly
+            onClicked: messageClass.message = "Updated from QML %1"; //messageClass.doMessageChange()
            background: Rectangle {
                 radius: 5
                 width: parent.width
