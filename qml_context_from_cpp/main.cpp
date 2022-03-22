@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include "message.h"
 #include <QDebug>
-
+#include "datatypes.h"
 
 void TestInvoke(QObject * rootObject) {
     QVariant return_value;
@@ -37,6 +37,11 @@ int main(int argc, char *argv[])
 
     // calling qml from cpp
     auto root_object = engine.rootObjects().first();
-    TestInvoke(root_object);
+    DataTypes my_dts;
+    my_dts.logVariantList(root_object);
+    my_dts.logVariantMap(root_object);
+
+    //TestInvoke(root_object);
+
     return app.exec();
 }

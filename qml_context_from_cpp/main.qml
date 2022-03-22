@@ -12,6 +12,20 @@ ApplicationWindow {
         return "This message was returned from a JavaScript function."
     }
 
+    function logger(element) {
+        print("Array element:"+element)
+    }
+
+    function logArray(anArray) {
+        anArray.forEach(logger)
+    }
+
+    function logMap(theMap) {
+        for (var element in theMap) {
+            print("Object item:", element, "=", theMap[element])
+        }
+
+    }
     // we no longer need to use connection
     Column {
         spacing:  5;
