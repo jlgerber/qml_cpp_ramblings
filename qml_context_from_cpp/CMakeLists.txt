@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(appqml_context_from_cpp
-    message.cpp
-    datatypes.cpp
+    ViewManager/mainviewmgr.cpp
+    startup.cpp
     main.cpp
 )
 
