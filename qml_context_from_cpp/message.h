@@ -16,6 +16,7 @@ public:
 public slots:
     void doMessageChange();
     void setMessage(QString value);
+    Q_INVOKABLE int sendMessageFromCpp(const QString value);
 signals:
     void messageChanged();
 private:

@@ -2,7 +2,21 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "message.h"
+#include <QDebug>
 
+
+void TestInvoke(QObject * rootObject) {
+    QVariant return_value;
+    QVariant msg = "Thisis a c++ parameter";
+    QMetaObject::invokeMethod(rootObject,
+                              "javaScriptFunction",
+                              Q_RETURN_ARG(QVariant, return_value),
+                              Q_ARG(QVariant, msg)
+                              );
+    qDebug() << "QML returned " << return_value;
+
+
+}
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -21,5 +35,8 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
+    // calling qml from cpp
+    auto root_object = engine.rootObjects().first();
+    TestInvoke(root_object);
     return app.exec();
 }

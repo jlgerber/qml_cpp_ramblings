@@ -7,12 +7,14 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-    Component.onCompleted: {
-        // we can also set the property directly from qml
-        messageClass.message = "set from qml %1";
+    function javaScriptFunction(value) {
+        print("C++ called the javascriptFunction iwth the parameter " + value);
+        return "This message was returned from a JavaScript function."
     }
+
     // we no longer need to use connection
     Column {
+        spacing:  5;
         Text {
             text: qsTr("Hello Integration World")
         }
@@ -34,6 +36,26 @@ ApplicationWindow {
            }
             palette {
                 //button: "#333333"
+                buttonText: hovered ? "white" : "#999999"
+            }
+        }
+
+        Button {
+            id: btn2Id
+            text: "Talk to CPP"
+            width: 200
+
+            onClicked:{
+                var result = messageClass.sendMessageFromCpp("This is QML saying Hi")
+                print("result: " + result)
+            }
+           background: Rectangle {
+                radius: 5
+                width: parent.width
+                height: parent.height
+                color: "#444444"
+           }
+            palette {
                 buttonText: hovered ? "white" : "#999999"
             }
         }
