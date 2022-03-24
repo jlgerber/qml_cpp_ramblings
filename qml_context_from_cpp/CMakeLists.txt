@@ -3,11 +3,13 @@ cmake_minimum_required(VERSION 3.16)
 project(qml_context_from_cpp VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(appqml_context_from_cpp
+    qml.qrc
     ViewManager/mainviewmgr.cpp
     startup.cpp
     main.cpp
@@ -16,7 +18,7 @@ qt_add_executable(appqml_context_from_cpp
 qt_add_qml_module(appqml_context_from_cpp
     URI qml_context_from_cpp
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES main.qml Header.qml
 )
 
 set_target_properties(appqml_context_from_cpp PROPERTIES
